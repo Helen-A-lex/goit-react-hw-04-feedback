@@ -1,4 +1,4 @@
-import { Component } from "react";
+import { useState } from "react";
 import { GlobalStyle } from "components/GlobalStyle";
 import { Layout } from "components/Layout";
 import Statistics  from "components/Statistics";
@@ -6,26 +6,21 @@ import FeedbackOptions  from "components/FeedbackOptions";
 import Section  from "components/Section";
 import Notification from "components/Notification";
 
-export class App extends Component {
-  state = {
-    good: 0,
-    neutral: 0,
-    bad: 0
-
-  };
-
+export default function App () {
   
+  const [good, setGood] = useState(0);
+  const [neutral, setNeutral] = useState(0);
+  const [bad, setBad] = useState(0);
 
-countTotalFeedback = () => {
-  const { good, neutral, bad } = this.state;
+const countTotalFeedback = (good,neutral,bad) => {
   return good + neutral + bad;
   
      
   };
 
- countPositiveFeedbackPercentage = () => {
-   const { good } = this.state;
-   const countTotalFeedback = this.countTotalFeedback();
+ const countPositiveFeedbackPercentage = (good) => {
+  //  const { good } = this.state;
+   const countTotalFeedback = countTotalFeedback(good,neutral,bad);
    if ( countTotalFeedback === 0) {
       return 0;
     }
@@ -41,9 +36,9 @@ countTotalFeedback = () => {
 };
 
   render() {
-    const { good, neutral,bad} = this.state;
-    const countTotalFeedback = this.countTotalFeedback();
-    const countPositiveFeedbackPercentage = this.countPositiveFeedbackPercentage();
+    // const { good, neutral,bad} = this.state;
+    // const countTotalFeedback = this.countTotalFeedback();
+    // const countPositiveFeedbackPercentage = this.countPositiveFeedbackPercentage();
    const optionsForFeedback = Object.keys(this.state);
     return (
       <Layout>
